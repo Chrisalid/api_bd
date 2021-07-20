@@ -1,4 +1,4 @@
 /venv/
 /.idea/
 /activities.db
-/requests.py
+/requests_tests.py
