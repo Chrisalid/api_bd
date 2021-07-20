@@ -32,20 +32,20 @@ def insert_activity():
 
 
 def update_activity():
-    activity = Activities.query.filter_by().first()
+    # activity = Activities.query.filter_by(name=).first()
     activity.save()
 
 
 def delete_activity():
-    activity = Activities.query.filter_by().first()
+    activity = Activities.query.filter_by(activity='Front-End').first()
     activity.delete()
 
 
 def query_activity():
-    # activity = Activities.query.all()
-    # print(activity)
-    activity = Activities.query.filter_by(activity='Front-End').first()
+    activity = Activities.query.all()
     print(activity)
+    # activity = Activities.query.filter_by(activity='Front-End').first()
+    # print(activity)
 
 
 if __name__ == '__main__':
@@ -55,4 +55,5 @@ if __name__ == '__main__':
     # query_persons()
     # insert_activity()
     # query_activity()
+    # delete_activity()
     pass
