@@ -98,7 +98,7 @@ class Activity_Status(Resource):
         try:
             data = request.json
             if 'status' in data:
-                activity.age = data['status']
+                activity.status = data['status']
             activity.save()
             response = {
                 'activity': activity.activity,
