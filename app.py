@@ -45,7 +45,26 @@ class Person(Resource):
         person.delete()
         return {'status': 'Success', 'message': message}
 
+class List_Persons(Resource):
+    def get(self):
+        persons = Persons.query.all()
+        response = [{'id': i.id, 'name': i.name, 'age': i.age} for i in persons]
+        return response
+
+
+    def post(self):
+        data = request.json
+        person = Persons(name=data['name'], age=data['age'])
+        person.save()
+        response = {
+            'id': person.id,
+            'name': person.name,
+            'age': person.age
+        }
+        return response
+
 api.add_resource(Person, '/person/<string:name>/')
+api.add_resource(List_Persons, '/person/')
 
 if __name__ == '__main__':
     app.run(debug=True)
