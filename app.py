@@ -63,10 +63,62 @@ class List_Persons(Resource):
         return response
 
 
+class Activity(Resource):
+    def get(self, person):
+        person_ = Persons.query.filter_by(name=person).first()
+        if person_ == None:
+            message = 'Person Not Found'
+            response = {'status': 'Error', 'message': message}
+            return response
+        else:
+            activity = Activities.query.filter_by(person=person_).all()
+            response = [{'activity': [i.activity for i in activity]}]
+            return response
+
+class Activity_Status(Resource):
+    def get(self, id):
+        activity = Activities.query.filter_by(id=id).first()
+        try:
+            response = {
+                'id': activity.id,
+                'activity': activity.activity,
+                'status': activity.status,
+                'person': activity.person.name,
+            }
+        except AttributeError:
+            message = f'Activity ID {id} Not Found'
+            response = {'status': 'Error', 'message': message}
+        except Exception:
+            message = 'Unknown Error'
+            response = {'status': 'Error', 'message': message}
+        return response
+
+    def put(self, id):
+        activity = Activities.query.filter_by(id=id).first()
+        try:
+            data = request.json
+            if 'status' in data:
+                activity.age = data['status']
+            activity.save()
+            response = {
+                'activity': activity.activity,
+                'status': activity.status,
+                'id': activity.id
+            }
+        except AttributeError:
+            message = f'Activity ID {id} Not Found'
+            response = {'status': 'Error', 'message': message}
+        except Exception:
+            message = 'Error Unknown'
+            response = {'status': 'Error', 'message': message}
+        return response
+
+
+
 class List_Activities(Resource):
     def get(self):
         activity = Activities.query.all()
-        response = [{'id': i.id, 'activity': i.activity, 'person': i.person.name} for i in activity]
+        response = [{'id': i.id, 'activity': i.activity, 'person': i.person.name, 'status': i.status} for i in activity]
         return response
 
     def post(self):
@@ -84,6 +136,8 @@ class List_Activities(Resource):
 
 api.add_resource(Person, '/person/<string:name>/')
 api.add_resource(List_Persons, '/person/')
+api.add_resource(Activity, '/activity/<string:person>/')
+api.add_resource(Activity_Status, '/activity/<int:id>/')
 api.add_resource(List_Activities, '/activity/')
 
 

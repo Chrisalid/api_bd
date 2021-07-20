@@ -2,14 +2,14 @@ from models import Persons, Activities, db_session
 
 
 def insert_person():
-    person = Persons(name='Glauber', age=22)
+    person = Persons(name='Josue', age=23)
     print(person)
     person.save()
 
 
 def update_person():
     person = Persons.query.filter_by(name='Chris').first()
-    person.age = 21
+    # person.status = 'Pendant'
     person.save()
 
 
@@ -21,31 +21,32 @@ def delete_person():
 def query_persons():
     person = Persons.query.all()
     print(person)
-    person = Persons.query.filter_by(name='Glauber').first()
-    print(person.id)
+    for i in person:
+        print(i.name, i.id)
 
 
 def insert_activity():
-    activity = Activities(activity='Front-End', person_id= 1)
+    activity = Activities(activity='Front-End', person_id= 2, status= 'Pendant')
     print(activity)
     activity.save()
 
 
 def update_activity():
-    # activity = Activities.query.filter_by(name=).first()
+    activity = Activities.query.filter_by(activity='Python').first()
+    activity.status = 'Pendant'
     activity.save()
 
 
 def delete_activity():
-    activity = Activities.query.filter_by(activity='Front-End').first()
+    activity = Activities.query.filter_by(activity='Python').first()
     activity.delete()
 
 
 def query_activity():
     activity = Activities.query.all()
     print(activity)
-    # activity = Activities.query.filter_by(activity='Front-End').first()
-    # print(activity)
+    for i in activity:
+        print(i.id, i.activity, i.person_id)
 
 
 if __name__ == '__main__':
@@ -54,6 +55,7 @@ if __name__ == '__main__':
     # delete_person()
     # query_persons()
     # insert_activity()
-    # query_activity()
+    # update_activity()
+    query_activity()
     # delete_activity()
     pass

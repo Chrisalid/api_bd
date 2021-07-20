@@ -35,6 +35,7 @@ class Activities(Base):
     __tablename__ = 'activities'
     id = Column(Integer, primary_key=True)
     activity = Column(String(80))
+    status = Column(String(60))
     person_id = Column(Integer, ForeignKey('persons.id'))
     person = relationship('Persons')
 
