@@ -1,4 +1,4 @@
-from models import Persons, Activities, db_session
+from models import Persons, Activities, Users, db_session
 
 
 def insert_person():
@@ -48,6 +48,21 @@ def query_activity():
     for i in activity:
         print(i.id, i.activity, i.person_id)
 
+def user_insert(user, password):
+    user_ = Users(user=user, password=password)
+    print(user_)
+    user_.save()
+
+
+def query_users():
+    user_ = Users.query.all()
+    print(user_)
+
+def update_user(user, password):
+    user_ = Users.query.filter_by(user=user).first()
+    user_.password = password
+    user_.save()
+
 
 if __name__ == '__main__':
     # insert_person()
@@ -56,6 +71,10 @@ if __name__ == '__main__':
     # query_persons()
     # insert_activity()
     # update_activity()
-    query_activity()
+    # query_activity()
     # delete_activity()
+    # user_insert('Chris_0', '1710')
+    # user_insert('Chris_1', '1017')
+    update_user('Chris_0', '2717')
+    query_users()
     pass
