@@ -49,7 +49,7 @@ def query_activity():
         print(i.id, i.activity, i.person_id)
 
 
-def user_insert(user, password):
+def insert_user(user, password):
     user_ = Users(user=user, password=password)
     print(user_)
     user_.save()
@@ -67,16 +67,20 @@ def query_users():
 
 
 if __name__ == '__main__':
-    # insert_person()
-    # update_person()
-    # delete_person()
+    # insert_person('Chris', 20)
+    # insert_person('Glauber', 22)
+    # insert_person('Josué', 23)
+
     # query_persons()
-    # insert_activity()
-    # update_activity()
+
+    # insert_activity('Program Python', 1, 'In Progress')
+    # insert_activity('Program Python_Flask', 1, 'In Progress')
+
+    # insert_activity('Make The Front-End', 2, 'Concluded')
+
     # query_activity()
-    # delete_activity()
-    # user_insert('Chris_0', '1710')
-    # user_insert('Chris_1', '1017')
-    update_user('Chris_0', '2717')
+
+    # insert_user('Chris_01', '1710')
+    # insert_user('Chris_02', '1017')
+
     query_users()
-    pass

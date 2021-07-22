@@ -12,7 +12,7 @@ api = Api(app)
 def verification(username, password):
     if not (username, password):
         return False
-    return Users.query.filter_by(user=username, password=password)
+    return Users.query.filter_by(user=username, password=password).first()
 
 
 class Person(Resource):
@@ -146,6 +146,12 @@ class List_Activities(Resource):
         return response
 
 
+class Begin(Resource):
+    def get(self):
+        return {'status': 'Online', 'message': 'Bem Vindo'}
+
+
+api.add_resource(Begin, '/')
 api.add_resource(Person, '/person/<string:name>/')
 api.add_resource(List_Persons, '/person/')
 api.add_resource(Activity, '/activity/<string:person>/')
