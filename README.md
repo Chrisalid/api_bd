@@ -9,4 +9,5 @@
 ## The app.py file
   * It uses the Flask API to show the data in the browser via the local server and depending on the method it asks for an authentication using Flask-httpauth.
 
-##### Auth: Monte, Christopher Feitosa
+##### Auth: Christopher Feitosa do Monte
+##### Corrections: Christopher Feitosa do Monte
