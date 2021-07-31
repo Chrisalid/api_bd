@@ -16,15 +16,12 @@ class Persons(Base):
     name = Column(String(40), index=True)
     age = Column(Integer)
 
-
     def __repr__(self):
         return f'<Person {self.name}>'
-
 
     def save(self):
         db_session.add(self)
         db_session.commit()
-
 
     def delete(self):
         db_session.delete(self)
@@ -39,15 +36,12 @@ class Activities(Base):
     person_id = Column(Integer, ForeignKey('persons.id'))
     person = relationship('Persons')
 
-
     def __repr__(self):
         return f'<Activities {self.activity}>'
-
 
     def save(self):
         db_session.add(self)
         db_session.commit()
-
 
     def delete(self):
         db_session.delete(self)
@@ -66,7 +60,6 @@ class Users(Base):
     def save(self):
         db_session.add(self)
         db_session.commit()
-
 
     def delete(self):
         db_session.delete(self)

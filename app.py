@@ -12,8 +12,7 @@ api = Api(app)
 def verification(username, password):
     if not (username, password):
         return False
-    return Users.query.filter_by(user=username, password=password)
-
+    return Users.query.filter_by(user=username, password=password).first()
 
 
 class Person(Resource):
@@ -60,7 +59,7 @@ class List_Persons(Resource):
     @auth.login_required
     def get(self):
         persons = Persons.query.all()
-        response = [{'id': i.id, 'name': i.name, 'age': i.age} for i in persons]
+        response = [{'id': i.id, 'name': i.name, 'age': i.age} for i in persons]  # noqa: E501
         return response
 
     def post(self):
@@ -78,7 +77,7 @@ class List_Persons(Resource):
 class Activity(Resource):
     def get(self, person):
         person_ = Persons.query.filter_by(name=person).first()
-        if person_ == None:
+        if person_ == None:  # noqa: E711
             message = 'Person Not Found'
             response = {'status': 'Error', 'message': message}
             return response
@@ -86,6 +85,7 @@ class Activity(Resource):
             activity = Activities.query.filter_by(person=person_).all()
             response = [{'activity': [i.activity for i in activity]}]
             return response
+
 
 class Activity_Status(Resource):
     def get(self, id):
@@ -126,12 +126,11 @@ class Activity_Status(Resource):
         return response
 
 
-
 class List_Activities(Resource):
     @auth.login_required
     def get(self):
         activity = Activities.query.all()
-        response = [{'id': i.id, 'activity': i.activity, 'person': i.person.name, 'status': i.status} for i in activity]
+        response = [{'id': i.id, 'activity': i.activity, 'person': i.person.name, 'status': i.status} for i in activity]   # noqa: E501
         return response
 
     def post(self):
@@ -147,6 +146,12 @@ class List_Activities(Resource):
         return response
 
 
+class Begin(Resource):
+    def get(self):
+        return {'status': 'Online', 'message': 'Bem Vindo'}
+
+
+api.add_resource(Begin, '/')
 api.add_resource(Person, '/person/<string:name>/')
 api.add_resource(List_Persons, '/person/')
 api.add_resource(Activity, '/activity/<string:person>/')
