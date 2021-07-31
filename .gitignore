@@ -1,5 +1,5 @@
-/.vscode/
 /venv/
 /.idea/
 /activities.db
 /requests_tests.py
+/.vscode/
