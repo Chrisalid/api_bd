@@ -206,6 +206,7 @@ api.add_resource(List_Persons, '/person/')
 api.add_resource(Activity, '/activity/<string:person>/')
 api.add_resource(Activity_Status, '/activity/<int:id>/')
 api.add_resource(List_Activities, '/activity/')
+
 docs.register(Person)
 docs.register(List_Persons)
 docs.register(Activity)
